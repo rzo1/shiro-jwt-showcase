@@ -18,8 +18,9 @@
     <liberty.var.default.http.port>${issuer.port}</liberty.var.default.http.port>
     <liberty.var.app.filename>${project.artifactId}-${project.version}</liberty.var.app.filename>
 
-    <liberty.env.KEYSTORE_PATH>${project.basedir}/src/main/resources/keystore.p12
-    </liberty.env.KEYSTORE_PATH>
+    <liberty.env.KEYSTORE_PATH>${project.basedir}/src/main/resources/keystore.p12</liberty.env.KEYSTORE_PATH>
+
+    <tomee.keystore.path>${project.basedir}/src/main/resources/keystore.p12</tomee.keystore.path>
   </properties>
 
   <dependencies>
@@ -49,23 +50,23 @@
       <plugin>
         <groupId>org.apache.tomee.maven</groupId>
         <artifactId>tomee-maven-plugin</artifactId>
-        <version>8.0.10</version>
+        <version>${plugin.tomee-maven-plugin.version}</version>
         <configuration>
           <tomeeVersion>8.0.10</tomeeVersion>
           <tomeeClassifier>microprofile</tomeeClassifier>
           <debug>true</debug>
-          <tomeeHttpPort>9081</tomeeHttpPort>
+          <tomeeHttpPort>${tomee.issuer.port}</tomeeHttpPort>
           <debugPort>5005</debugPort>
           <args>-Dfoo=bar</args>
           <config>${project.basedir}/src/test/tomee/conf</config>
           <skipCurrentProject>true</skipCurrentProject>
           <systemVariables>
-            <KEYSTORE_PATH>${project.basedir}/src/main/resources/keystore.p12</KEYSTORE_PATH>
-            <issuer.name>http://localhost:8081</issuer.name>
+            <KEYSTORE_PATH>${tomee.keystore.path}</KEYSTORE_PATH>
+            <issuer.name>${tomee.issuer.name}</issuer.name>
           </systemVariables>
           <webapps>
             <webapp>
-              io.github.bmarwell.shiro:shiro.jwt.jaxrs.issuer:1.0.0-SNAPSHOT?name=ROOT
+              ${groupId}:${tomee.app.name}?name=ROOT
             </webapp>
           </webapps>
         </configuration>
