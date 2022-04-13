@@ -58,4 +58,32 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomee.maven</groupId>
+        <artifactId>tomee-maven-plugin</artifactId>
+        <version>8.0.10</version>
+        <configuration>
+          <tomeeVersion>8.0.10</tomeeVersion>
+          <tomeeClassifier>microprofile</tomeeClassifier>
+          <debug>true</debug>
+          <tomeeHttpPort>9081</tomeeHttpPort>
+          <debugPort>5005</debugPort>
+          <args>-Dfoo=bar</args>
+          <config>${project.basedir}/src/test/tomee/conf</config>
+          <skipCurrentProject>true</skipCurrentProject>
+          <systemVariables>
+            <KEYSTORE_PATH>${project.basedir}/src/main/resources/keystore.p12</KEYSTORE_PATH>
+            <issuer.name>http://localhost:8081</issuer.name>
+          </systemVariables>
+          <webapps>
+            <webapp>
+              io.github.bmarwell.shiro:shiro.jwt.jaxrs.issuer:1.0.0-SNAPSHOT?name=ROOT
+            </webapp>
+          </webapps>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
