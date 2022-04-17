@@ -84,7 +84,7 @@
               </systemVariables>
               <webapps>
                 <webapp>
-                  ${groupId}:${tomee.app.name}?name=ROOT
+                  ${project.groupId}:${tomee.app.name}?name=ROOT
                 </webapp>
               </webapps>
             </configuration>
