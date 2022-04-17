@@ -16,8 +16,8 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -58,31 +58,39 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.tomee.maven</groupId>
-        <artifactId>tomee-maven-plugin</artifactId>
-        <version>${plugin.tomee-maven-plugin.version}</version>
-        <configuration>
-          <tomeeVersion>8.0.10</tomeeVersion>
-          <tomeeClassifier>microprofile</tomeeClassifier>
-          <debug>true</debug>
-          <tomeeHttpPort>${tomee.issuer.port}</tomeeHttpPort>
-          <debugPort>5005</debugPort>
-          <args>-Dfoo=bar</args>
-          <config>${project.basedir}/src/test/tomee/conf</config>
-          <skipCurrentProject>true</skipCurrentProject>
-          <systemVariables>
-            <issuer.name>${tomee.issuer.name}</issuer.name>
-          </systemVariables>
-          <webapps>
-            <webapp>
-              ${groupId}:${tomee.app.name}?name=ROOT
-            </webapp>
-          </webapps>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <profiles>
+    <profile>
+      <id>tomee</id>
+      <properties>
+        <tomee.app.name>${project.artifactId}:${project.version}</tomee.app.name>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.tomee.maven</groupId>
+            <artifactId>tomee-maven-plugin</artifactId>
+            <version>${plugin.tomee-maven-plugin.version}</version>
+            <configuration>
+              <tomeeVersion>8.0.10</tomeeVersion>
+              <tomeeClassifier>microprofile</tomeeClassifier>
+              <debug>false</debug>
+              <tomeeHttpPort>${tomee.default.http.port}</tomeeHttpPort>
+              <debugPort>5005</debugPort>
+              <args>-Dfoo=bar</args>
+              <config>${project.basedir}/src/test/tomee/conf</config>
+              <skipCurrentProject>true</skipCurrentProject>
+              <systemVariables>
+                <issuer.name>${tomee.issuer.name}</issuer.name>
+              </systemVariables>
+              <webapps>
+                <webapp>
+                  ${groupId}:${tomee.app.name}?name=ROOT
+                </webapp>
+              </webapps>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

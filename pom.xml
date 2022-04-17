@@ -55,9 +55,7 @@
     <liberty.env.ISSUER_NAME>http://localhost:${issuer.port}/</liberty.env.ISSUER_NAME>
 
     <!-- tomee settings -->
-
     <tomee.default.http.port>9080</tomee.default.http.port>
-    <tomee.app.name>${project.artifactId}:${project.version}</tomee.app.name>
     <tomee.issuer.port>${issuer.port}</tomee.issuer.port>
     <tomee.issuer.name>${liberty.env.ISSUER_NAME}</tomee.issuer.name>
 
