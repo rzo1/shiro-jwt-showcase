@@ -74,7 +74,6 @@
           <config>${project.basedir}/src/test/tomee/conf</config>
           <skipCurrentProject>true</skipCurrentProject>
           <systemVariables>
-            <KEYSTORE_PATH>${tomee.keystore.path}</KEYSTORE_PATH>
             <issuer.name>${tomee.issuer.name}</issuer.name>
           </systemVariables>
           <webapps>
