@@ -187,6 +187,7 @@
               <tomeeClassifier>microprofile</tomeeClassifier>
               <debug>false</debug>
               <tomeeHttpPort>${tomee.default.http.port}</tomeeHttpPort>
+              <tomeeShutdownPort>7000</tomeeShutdownPort>
               <debugPort>5005</debugPort>
               <args>-Dfoo=bar</args>
               <config>${project.basedir}/src/test/tomee/conf</config>
